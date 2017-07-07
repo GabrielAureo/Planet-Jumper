@@ -21,8 +21,8 @@ public class LineController : MonoBehaviour {
 
 	void SetupLine(){
 		line.positionCount = 2;
-		line.SetPosition(0,Vector3.zero);
-		line.SetPosition(1,Vector3.zero);
+		line.SetPosition(0,Vector2.zero);
+		line.SetPosition(1,Vector2.zero);
 		line.startWidth = .5f;
 		line.endWidth = 0f;
 		line.numCapVertices = 0;
@@ -39,8 +39,8 @@ public class LineController : MonoBehaviour {
 	}
 
 	void endLine(Vector2 end){
-		line.SetPosition(0,Vector3.zero);
-		line.SetPosition(1,Vector3.zero);
+		line.SetPosition(0,Vector2.zero);
+		line.SetPosition(1,Vector2.zero);
 		line.numCapVertices = 0;
 	}
 }
