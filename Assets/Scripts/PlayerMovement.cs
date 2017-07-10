@@ -11,11 +11,19 @@ public class PlayerMovement : MonoBehaviour {
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         Swipe.onLift += Throw;
+        PlayerCollision.onHit += Stop;
+    }
+    void Update(){
+        //transform.localScale = Vector3.one + Vector3.one * (1/PlanetsGenerator.plane.z)*(PlanetsGenerator.plane.x * transform.position.x + PlanetsGenerator.plane.y * transform.position.y);
+
     }
 
     void Throw (Vector2 angle){
 		rb.velocity = Vector3.zero;
 		rb.AddForce(angle * angle.magnitude * force);
-
 	}
+
+    void Stop(Vector2 etc){
+        rb.velocity = Vector2.zero;
+    }
 }

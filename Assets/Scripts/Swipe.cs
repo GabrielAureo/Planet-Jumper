@@ -20,14 +20,14 @@ public class Swipe: MonoBehaviour {
 	
 	void Update(){
 		if(Input.GetMouseButtonDown(0)){
-			clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			clickPos = GetWorldPositionOnPlane(Input.mousePosition,0);
 			Debug.Log(clickPos);
 			if(onClick!=null){
 				onClick(clickPos);
 			}
 		}
 		if(Input.GetMouseButton(0)){
-			currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			currentPos = GetWorldPositionOnPlane(Input.mousePosition,0);
 			if(onHold!=null){
 				onHold(currentPos);
 			}
@@ -44,6 +44,14 @@ public class Swipe: MonoBehaviour {
 
 
 	}
+
+	Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z) {
+		Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+		Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, z));
+		float distance;
+		xy.Raycast(ray, out distance);
+		return ray.GetPoint(distance);
+ 	}
 
 	
 }
