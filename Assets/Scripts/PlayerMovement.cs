@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 		rb.AddForce(angle * angle.magnitude * force);
 	}
 
-    void Stop(Vector2 etc){
+    void Stop(GameObject etc){
         rb.velocity = Vector2.zero;
     }
 }

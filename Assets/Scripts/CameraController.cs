@@ -10,15 +10,18 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void moveCamera(Vector2 target){
-		transform.position = new Vector3(target.x, target.y, transform.position.z);
+	void moveCamera(GameObject target){
+		Vector3 targetPos = new Vector3(target.transform.position.x,target.transform.position.y,transform.position.z);
+		StartCoroutine(moveTo(targetPos));
 	}
 
-	IEnumerator move(Vector2 target){
+	IEnumerator moveTo(Vector3 target){
+		float timeToStart = Time.time;
 
-		while((Vector2)transform.position != target){
-			transform.position = Vector3.Lerp(transform.position, new Vector3(target.x,target.y, transform.position.z), 0.2f);
+		while(Vector2.Distance(transform.position, target) > 0.05f){
+			transform.position = Vector3.Lerp(transform.position, new Vector3(target.x,target.y, transform.position.z), (Time.time - timeToStart )* 0.3f );
+			yield return null;
 		}
-		yield return null;
+		
 	}
 }

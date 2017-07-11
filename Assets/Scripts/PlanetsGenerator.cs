@@ -11,11 +11,10 @@ static class Constants
 }
 
 public class PlanetsGenerator : MonoBehaviour {
-	[SerializeField]
 	//List<Vector2> planetsPos;
 	List<GameObject> planets;
-	public float radius_x;
-	public float radius_y;
+	float radius_x;
+	float radius_y;
 	public GameObject platform;
 	//Vector3 plane;
 
@@ -27,18 +26,21 @@ public class PlanetsGenerator : MonoBehaviour {
 		radius_x = edgeVector.x;
 		radius_y = edgeVector.y;
 		
-		PlayerCollision.onHit += generate;
+		PlayerCollision.onHit += getPlanetHit;
 
 		generate(Vector2.zero);
 	}
 	
 	// Update is called once per frame
+	public void getPlanetHit(GameObject hit){
 
+		deletePlanets(hit);
+		generate(hit.transform.position);
+	}
 	public void generate(Vector2 center){
 		List<Vector2> planetsPos = randomPoints();
 		foreach(Vector2 planetPos in planetsPos){
 				GameObject p = (GameObject) Instantiate(platform, planetPos + center, new Quaternion(0,0,0,0));
-				//p.transform.localScale *= ((planetPos.x * plane.x) + (planetPos.y * plane.y))/plane.z; 
 				planets.Add(p);
 				
 		}
@@ -50,12 +52,6 @@ public class PlanetsGenerator : MonoBehaviour {
 		int planetsCount = Random.Range(1,5);
 		planetsCount = 5;
 		float partAngles = ((2*Mathf.PI) / (planetsCount));
-		
-
-		deletePlanets();
-
-		//plane = generatePlane();
-		
 
 		for(int i = 0; i < planetsCount; i++){
 			float rotation = Random.Range(-10 * Mathf.Deg2Rad, 10 * Mathf.Deg2Rad);
@@ -69,15 +65,14 @@ public class PlanetsGenerator : MonoBehaviour {
 		return planetPos;
 	}
 
-	void deletePlanets(){
+	void deletePlanets(GameObject hit){
 		foreach(GameObject planet in planets){
+			if(planet == hit){
+				continue;
+			}
 			Destroy(planet);
 		}
+		planets.Clear();
+		planets.Add(hit);
 	}
-
-/*	Vector3 generatePlane(){
-		float angle = Random.Range(30f,45f);
-		Vector3 vector = Quaternion.Euler(angle,0,0) * Vector3.forward;
-		return vector;
-	}*/
 }
