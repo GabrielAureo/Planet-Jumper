@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 static class Constants
 {
@@ -20,9 +19,9 @@ public class PlanetsGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//planetsPos = new List<Vector2>();
 		planets = new List<GameObject>();
-		Vector2 edgeVector = Camera.main.ScreenToWorldPoint(Vector2.one);
+		Vector2 edgeVector = Camera.main.ScreenToWorldPoint(Vector2.zero);
+		Debug.Log("edgevector" + edgeVector);
 		radius_x = edgeVector.x;
 		radius_y = edgeVector.y;
 		

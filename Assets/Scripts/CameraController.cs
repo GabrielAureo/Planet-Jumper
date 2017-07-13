@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
+	public float speed = 0.3f;
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +20,7 @@ public class CameraController : MonoBehaviour {
 		float timeToStart = Time.time;
 
 		while(Vector2.Distance(transform.position, target) > 0.05f){
-			transform.position = Vector3.Lerp(transform.position, new Vector3(target.x,target.y, transform.position.z), (Time.time - timeToStart )* 0.3f );
+			transform.position = Vector3.Lerp(transform.position, new Vector3(target.x,target.y, transform.position.z), (Time.time - timeToStart )* speed );
 			yield return null;
 		}
 		
