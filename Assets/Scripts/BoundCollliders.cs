@@ -8,7 +8,9 @@ public class BoundCollliders : MonoBehaviour {
     private Vector2 screenSize;
  
     void Start ()
-    {//Create a Dictionary to contain all our Objects/Transforms
+    {
+
+        //Create a Dictionary to contain all our Objects/Transforms
         System.Collections.Generic.Dictionary<string,Transform> colliders = new System.Collections.Generic.Dictionary<string,Transform>();
     //Create our GameObjects and add their Transform components to the Dictionary we created above
         colliders.Add("Top",new GameObject().transform);
@@ -22,7 +24,9 @@ public class BoundCollliders : MonoBehaviour {
     //For each Transform/Object in our Dictionary
         foreach(KeyValuePair<string,Transform> valPair in colliders)
         {
-            valPair.Value.gameObject.AddComponent<BoxCollider2D>(); //Add our colliders. Remove the "2D", if you would like 3D colliders.
+
+            BoxCollider2D col = valPair.Value.gameObject.AddComponent<BoxCollider2D>(); //Add our colliders. Remove the "2D", if you would like 3D colliders.
+            col.isTrigger = true;
             valPair.Value.name = valPair.Key + "Collider"; //Set the object's name to it's "Key" name, and take on "Collider".  i.e: TopCollider
             valPair.Value.parent = transform; //Make the object a child of whatever object this script is on (preferably the camera)
  
@@ -37,4 +41,5 @@ public class BoundCollliders : MonoBehaviour {
         colliders["Top"].position = new Vector3(cameraPos.x, cameraPos.y + screenSize.y + (colliders["Top"].localScale.y * 0.5f), zPosition);
         colliders["Bottom"].position = new Vector3(cameraPos.x, cameraPos.y - screenSize.y - (colliders["Bottom"].localScale.y * 0.5f), zPosition);
     }
+
 }

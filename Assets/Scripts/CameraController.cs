@@ -7,11 +7,13 @@ public class CameraController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		PlayerCollision.onHit += moveCamera;
+		
+		PlayerCollision.onPlatformHit += moveCamera;
 	}
 	
 	// Update is called once per frame
 	void moveCamera(GameObject target){
+		StopAllCoroutines();
 		Vector3 targetPos = new Vector3(target.transform.position.x,target.transform.position.y,transform.position.z);
 		StartCoroutine(moveTo(targetPos));
 	}
