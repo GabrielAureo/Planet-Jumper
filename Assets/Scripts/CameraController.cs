@@ -34,4 +34,8 @@ public class CameraController : MonoBehaviour {
 		}
 		
 	}
+	void OnDestroy()
+	{
+		PlayerCollision.onPlatformHit -= moveCamera;
+	}
 }

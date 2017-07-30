@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollision : MonoBehaviour {
 	public delegate void CollisionHandler(GameObject other);
@@ -12,12 +13,20 @@ public class PlayerCollision : MonoBehaviour {
 	// Update is called once per frame
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		if(col.transform.root.tag == "MainCamera" && onBoundHit != null){
-			onBoundHit(col.gameObject);
+		if(col.transform.tag == "GameOver" /* && onBoundHit != null*/ ){
+			//onBoundHit(col.gameObject);
+			Debug.Log("Morreu");
+			GameOverTest();
+
 		}
 
 		if(col.GetComponent<Platform>() != null && onPlatformHit != null){
 			onPlatformHit(col.gameObject);
 		}	
 	}
+
+	void GameOverTest(){
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+	}
+
 }

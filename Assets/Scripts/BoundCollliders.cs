@@ -29,6 +29,7 @@ public class BoundCollliders : MonoBehaviour {
         {
 
             BoxCollider2D col = valPair.Value.gameObject.AddComponent<BoxCollider2D>(); //Add our colliders. Remove the "2D", if you would like 3D colliders.
+            col.transform.tag = "GameOver";
             col.isTrigger = true;
             valPair.Value.name = valPair.Key + "Collider"; //Set the object's name to it's "Key" name, and take on "Collider".  i.e: TopCollider
             valPair.Value.parent = transform; //Make the object a child of whatever object this script is on (preferably the camera)

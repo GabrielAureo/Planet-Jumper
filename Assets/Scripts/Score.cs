@@ -64,4 +64,10 @@ public class Score : MonoBehaviour {
 		return value+"x";
 	}
 
+	void OnDestroy()
+	{
+		PlayerCollision.onPlatformHit -=  hitPlatform; 
+		BoundCollliders.onGameOver -= resetPoints;
+	}
+
 }

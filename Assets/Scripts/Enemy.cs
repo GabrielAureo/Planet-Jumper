@@ -26,4 +26,9 @@ public class Enemy : Platform {
 		Destroy(gameObject);
 		CameraController.finishedMoving -= randomLaunch;
 	}
+
+	void OnDestroy()
+	{
+		CameraController.finishedMoving -= randomLaunch;
+	}
 }

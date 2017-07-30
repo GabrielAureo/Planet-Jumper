@@ -66,5 +66,10 @@ public class Swipe: MonoBehaviour {
 		return ray.GetPoint(distance);
  	}
 
+	 void OnDestroy()
+	 {
+		 CameraController.finishedMoving -= canSwipeAgain;
+	 }
+
 	
 }
