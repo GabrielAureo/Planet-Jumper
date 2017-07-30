@@ -5,6 +5,9 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 	public float speed = 0.3f;
 
+	public delegate void eventHandler();
+	public static event eventHandler finishedMoving;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -24,6 +27,10 @@ public class CameraController : MonoBehaviour {
 		while(Vector2.Distance(transform.position, target) > 0.05f){
 			transform.position = Vector3.Lerp(transform.position, new Vector3(target.x,target.y, transform.position.z), (Time.time - timeToStart )* speed );
 			yield return null;
+		}
+
+		if (finishedMoving != null){
+			finishedMoving();
 		}
 		
 	}

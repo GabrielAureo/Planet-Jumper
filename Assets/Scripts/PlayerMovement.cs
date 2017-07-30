@@ -25,9 +25,10 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Throw (Vector2 angle){
+        Debug.Log(angle);
         Swipe.onHold -= Rotate;
         rb.velocity = Vector3.zero;
-        rb.AddForce(angle * force);
+        rb.AddForce((angle - (Vector2)transform.position) * force);
 	}
 
     void startRotation(Vector2 initial_){
@@ -36,15 +37,18 @@ public class PlayerMovement : MonoBehaviour {
 
     void Rotate(Vector2 angle){
         if(platform!= null){
-            transform.position = (Vector2)platform.transform.position + ((angle - initial).normalized * platform.radius);
+            //transform.position = (Vector2)platform.transform.position + ((angle - initial).normalized * platform.radius);
+            transform.position = platform.transform.position + ((Vector3)angle-platform.transform.position).normalized * platform.radius;
         }
         
     }
 
     void Collided(GameObject other){
         rb.velocity = Vector2.zero;
+        if((platform = other.GetComponent<Platform>()) != null){
+            transform.position = platform.transform.position + (transform.position - platform.transform.position).normalized * platform.radius;
+        }
         if(other.tag == "Planet"){
-            platform = other.GetComponent<Platform>();
             Swipe.onHold += Rotate;
         }
     }

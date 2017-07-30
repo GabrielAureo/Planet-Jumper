@@ -6,6 +6,9 @@ public class BoundCollliders : MonoBehaviour {
 	public float colThickness = 4f;
     public float zPosition = 0f;
     private Vector2 screenSize;
+
+    public delegate void GameOverHandler();
+    public static event GameOverHandler onGameOver;
  
     void Start ()
     {
@@ -40,6 +43,13 @@ public class BoundCollliders : MonoBehaviour {
         colliders["Left"].position = new Vector3(cameraPos.x - screenSize.x - (colliders["Left"].localScale.x * 0.5f), cameraPos.y, zPosition);
         colliders["Top"].position = new Vector3(cameraPos.x, cameraPos.y + screenSize.y + (colliders["Top"].localScale.y * 0.5f), zPosition);
         colliders["Bottom"].position = new Vector3(cameraPos.x, cameraPos.y - screenSize.y - (colliders["Bottom"].localScale.y * 0.5f), zPosition);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (onGameOver != null){
+            onGameOver();
+        }
     }
 
 }

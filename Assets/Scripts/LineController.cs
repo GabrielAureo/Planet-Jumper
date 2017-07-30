@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LineController : MonoBehaviour {
-
+	Transform player;
 	LineRenderer line;
 	public float zPos = -10;
 
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 		line = gameObject.GetComponent<LineRenderer>();
 		SetupLine();
 		Swipe.onClick += setLineStart;
@@ -30,15 +31,17 @@ public class LineController : MonoBehaviour {
 	}
 	
 	void setLineStart(Vector2 start){
-		Vector3 start_ = new Vector3(start.x,start.y,zPos);
+		Vector3 start_ = new Vector3(player.position.x,player.position.y,zPos);
 		line.SetPosition(0,start_);
 		line.SetPosition(1,start_);
 		line.numCapVertices = 1;
 	}
 
 	void moveLineEnd(Vector2 end){
+		Vector3 start_ = new Vector3(player.position.x,player.position.y,zPos);
+		line.SetPosition(0,start_);
 		Vector3 end_ = new Vector3(end.x,end.y,zPos);
-		line.SetPosition(1,end);
+		line.SetPosition(1, end_);
 	}
 
 	void endLine(Vector2 end){

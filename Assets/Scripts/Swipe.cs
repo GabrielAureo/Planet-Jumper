@@ -17,7 +17,7 @@ public class Swipe: MonoBehaviour {
 
 
 	void Start(){
-		PlayerCollision.onPlatformHit += canSwipeAgain;
+		CameraController.finishedMoving += canSwipeAgain;
 		canSwipe = true;
 	}
 
@@ -33,6 +33,7 @@ public class Swipe: MonoBehaviour {
 			}
 			if(Input.GetMouseButton(0)){
 				currentPos = GetWorldPositionOnPlane(Input.mousePosition,0);
+				Vector2 v = clickPos - currentPos;
 				if(onHold!=null){
 					onHold(currentPos);
 				}
@@ -40,9 +41,9 @@ public class Swipe: MonoBehaviour {
 
 			if(Input.GetMouseButtonUp(0)){
 				Vector2 v = currentPos - clickPos;
-				angle = Mathf.Atan2(1 - v.x, v.y) * Mathf.Rad2Deg;
+				//angle = Mathf.Atan2(1 - v.x, v.y) * Mathf.Rad2Deg;
 				if(onLift != null){
-					onLift(v);
+					onLift(currentPos);
 				}
 				if(v.magnitude > 0)
 					canSwipe = false;
@@ -53,7 +54,7 @@ public class Swipe: MonoBehaviour {
 
 	}
 
-	void canSwipeAgain(GameObject etc){
+	void canSwipeAgain(){
 		canSwipe = true;
 	}
 
