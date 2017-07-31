@@ -53,4 +53,13 @@ public class BoundCollliders : MonoBehaviour {
         }
     }
 
+    void OnDestroy()
+    {   
+        if(onGameOver != null){
+                foreach(GameOverHandler d in onGameOver.GetInvocationList()){
+                    onGameOver -= d;
+                }
+        }
+    }
+
 }

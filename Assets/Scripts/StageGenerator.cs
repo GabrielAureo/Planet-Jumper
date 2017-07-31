@@ -48,9 +48,5 @@ public class StageGenerator : MonoBehaviour {
 		return Random.Range(2,6);
 	}
 
-	void OnDestroy()
-	{
-		PlayerCollision.onPlatformHit -= newStage;
-	}
-
+	
 }

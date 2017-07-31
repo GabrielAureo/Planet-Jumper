@@ -29,4 +29,23 @@ public class PlayerCollision : MonoBehaviour {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
 	}
 
+	void OnDestroy()
+	{	
+		if(onBoundHit!=null){
+			foreach(CollisionHandler d in onBoundHit.GetInvocationList()){
+				onBoundHit -= d;
+			}
+		}
+		if(onPlatformHit!= null){
+			foreach(CollisionHandler d in onPlatformHit.GetInvocationList()){
+				onPlatformHit -= d;
+			}
+		}
+		if(onObstacleHit!=null){
+			foreach(CollisionHandler d in onObstacleHit.GetInvocationList()){
+				onObstacleHit -= d;
+			}
+		}
+	}
+
 }

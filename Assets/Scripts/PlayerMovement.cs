@@ -53,12 +53,6 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    void OnDestroy()
-    {
-        Swipe.onLift -= Throw;
-        PlayerCollision.onPlatformHit -= Collided;
-        Swipe.onClick -= startRotation;
-    }
 
     
 }

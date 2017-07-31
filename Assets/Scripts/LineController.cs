@@ -49,11 +49,4 @@ public class LineController : MonoBehaviour {
 		line.SetPosition(1,Vector3.forward * zPos);
 		line.numCapVertices = 0;
 	}
-
-	void OnDestroy()
-	{
-		Swipe.onClick -= setLineStart;
-		Swipe.onHold -= moveLineEnd;
-		Swipe.onLift -= endLine;
-	}
 }

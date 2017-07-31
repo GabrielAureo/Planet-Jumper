@@ -36,6 +36,8 @@ public class CameraController : MonoBehaviour {
 	}
 	void OnDestroy()
 	{
-		PlayerCollision.onPlatformHit -= moveCamera;
+		foreach(eventHandler d in finishedMoving.GetInvocationList()){
+			finishedMoving -= d;
+		}
 	}
 }

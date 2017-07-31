@@ -67,8 +67,22 @@ public class Swipe: MonoBehaviour {
  	}
 
 	 void OnDestroy()
-	 {
-		 CameraController.finishedMoving -= canSwipeAgain;
+	 {		
+		if(onClick != null){
+			foreach(mouseHandler d in onClick.GetInvocationList()){
+				onClick -= d;
+			}
+		}
+		if(onHold!=null){
+			foreach(mouseHandler d in onHold.GetInvocationList()){
+			onHold -= d;
+			}
+		}
+		if(onLift!=null){
+			foreach(mouseHandler d in onLift.GetInvocationList()){
+				onLift -= d;
+			}
+		}
 	 }
 
 	
