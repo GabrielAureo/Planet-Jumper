@@ -17,7 +17,7 @@ public abstract class ElementGenerator<T>{
         this.elements = new List<GameObject>();
     }
 
-    public abstract void Spawn(List<Vector2> positions);
+    public abstract List<GameObject> Spawn(List<Vector2> positions);
 
     public abstract void Delete(GameObject hit);
 }

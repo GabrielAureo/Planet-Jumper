@@ -36,8 +36,6 @@ public class CameraController : MonoBehaviour {
 	}
 	void OnDestroy()
 	{
-		foreach(eventHandler d in finishedMoving.GetInvocationList()){
-			finishedMoving -= d;
-		}
+		finishedMoving = null;
 	}
 }

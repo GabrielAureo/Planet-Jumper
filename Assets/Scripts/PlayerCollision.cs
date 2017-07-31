@@ -31,21 +31,9 @@ public class PlayerCollision : MonoBehaviour {
 
 	void OnDestroy()
 	{	
-		if(onBoundHit!=null){
-			foreach(CollisionHandler d in onBoundHit.GetInvocationList()){
-				onBoundHit -= d;
-			}
-		}
-		if(onPlatformHit!= null){
-			foreach(CollisionHandler d in onPlatformHit.GetInvocationList()){
-				onPlatformHit -= d;
-			}
-		}
-		if(onObstacleHit!=null){
-			foreach(CollisionHandler d in onObstacleHit.GetInvocationList()){
-				onObstacleHit -= d;
-			}
-		}
+		onBoundHit = null;
+		onPlatformHit = null;
+		onObstacleHit = null;
 	}
 
 }

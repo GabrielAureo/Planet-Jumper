@@ -18,12 +18,10 @@ public class PlatformGenerator : ElementGenerator<PlatformsEnum>{
 
         foreach(KeyValuePair<PlatformsEnum,List<GameObject>> prefab in prefabs){
             platforms.AddRange(prefab.Value);
-
-            Debug.Log(prefab.Key.ToString());
         }
         
     }
-    override public void Spawn(List<Vector2> positions){
+    override public List<GameObject> Spawn(List<Vector2> positions){
         GameObject chosenEnemy = enemies[Random.Range(0,enemies.Count)];
         Vector2 chosenPosition = positions[Random.Range(0,positions.Count)];
         positions.Remove(chosenPosition);
@@ -35,6 +33,8 @@ public class PlatformGenerator : ElementGenerator<PlatformsEnum>{
 				GameObject p = GameObject.Instantiate(platform, pos, new Quaternion(0,0,0,0));
 				elements.Add(p);
 		}
+
+        return elements;
     }
     
 

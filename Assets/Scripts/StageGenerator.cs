@@ -6,9 +6,9 @@ using UnityEngine;
 public class StageGenerator : MonoBehaviour {
 	public List<GameObject> enemiesPrefabs;
 	public List<GameObject> planetsPrefabs;
-
 	Dictionary<PlatformsEnum, List<GameObject>> PlatformDictionary;
 	
+	public static List<GameObject> platformList;
 
 	public GameObject[] obstaclesPrefabs;
 	//Dictionary<ObstacleEnum, List<GameObject>> ObstacleDictionary; #TODO
@@ -38,9 +38,9 @@ public class StageGenerator : MonoBehaviour {
 
 	void stageLayout(Vector2 center){
 		List<Vector2> platformPositions;
-		float worldRotation = Random.value * Mathf.PI;
-		platformPositions = platformGenerator.posGen.uniformDistance(platformCount(),center);
-		platformGenerator.Spawn(platformPositions);
+		float worldRotation = Random.value * 2 * Mathf.PI;
+		platformPositions = platformGenerator.posGen.uniformDistance(platformCount(),center,worldRotation);
+		platformList = platformGenerator.Spawn(platformPositions);
 
 	}
 

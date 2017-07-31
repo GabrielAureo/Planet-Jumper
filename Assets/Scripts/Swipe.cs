@@ -25,14 +25,14 @@ public class Swipe: MonoBehaviour {
 	void Update(){
 		if(canSwipe){
 			if(Input.GetMouseButtonDown(0)){
-				clickPos = GetWorldPositionOnPlane(Input.mousePosition,0);
+				clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				Debug.Log(clickPos);
 				if(onClick!=null){
 					onClick(clickPos);
 				}
 			}
 			if(Input.GetMouseButton(0)){
-				currentPos = GetWorldPositionOnPlane(Input.mousePosition,0);
+				currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				Vector2 v = clickPos - currentPos;
 				if(onHold!=null){
 					onHold(currentPos);
@@ -45,7 +45,7 @@ public class Swipe: MonoBehaviour {
 				if(onLift != null){
 					onLift(currentPos);
 				}
-				if(v.magnitude > 0)
+				if(v.magnitude != 0.0f)
 					canSwipe = false;
 				
 			}
@@ -58,31 +58,13 @@ public class Swipe: MonoBehaviour {
 		canSwipe = true;
 	}
 
-	Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z) {
-		Ray ray = Camera.main.ScreenPointToRay(screenPosition);
-		Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, z));
-		float distance;
-		xy.Raycast(ray, out distance);
-		return ray.GetPoint(distance);
- 	}
+	
 
 	 void OnDestroy()
 	 {		
-		if(onClick != null){
-			foreach(mouseHandler d in onClick.GetInvocationList()){
-				onClick -= d;
-			}
-		}
-		if(onHold!=null){
-			foreach(mouseHandler d in onHold.GetInvocationList()){
-			onHold -= d;
-			}
-		}
-		if(onLift!=null){
-			foreach(mouseHandler d in onLift.GetInvocationList()){
-				onLift -= d;
-			}
-		}
+		onClick = null;
+		onHold = null;
+		onLift = null;
 	 }
 
 	
