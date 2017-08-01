@@ -9,12 +9,12 @@ public abstract class Obstacle: MonoBehaviour{
     }
 
 
-    abstract protected void onHit();
+    abstract protected void onHit(Collider2D other);
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Player"){
-            onHit();
+            onHit(other);
         }
     }
     

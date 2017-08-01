@@ -24,11 +24,14 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
-    void Throw (Vector2 angle){
-        Debug.Log(angle);
+    public void Throw (Vector2 angle){
         Swipe.onHold -= Rotate;
         rb.velocity = Vector3.zero;
-        rb.AddForce((angle - (Vector2)transform.position) * force);
+        Vector2 direction = angle - (Vector2)transform.position;
+        if(direction.magnitude < 1)
+            direction = direction.normalized;
+        rb.AddForce(direction * force);
+
 	}
 
     void startRotation(Vector2 initial_){

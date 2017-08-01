@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Entropy: Obstacle{
 
-    override protected void onHit(){
+    override protected void onHit(Collider2D etc){
         
         List<GameObject> platforms = StageGenerator.platformList;
         if(platforms.Count <= 1){

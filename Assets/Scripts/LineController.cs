@@ -9,7 +9,7 @@ public class LineController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+		player = GameObject.FindGameObjectWithTag("Player").transform;
 		line = gameObject.GetComponent<LineRenderer>();
 		SetupLine();
 		Swipe.onClick += setLineStart;

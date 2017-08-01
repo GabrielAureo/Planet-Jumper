@@ -13,10 +13,13 @@ public class Swipe: MonoBehaviour {
 	public static event mouseHandler onHold;
 	public static event mouseHandler onLift;
 
-	bool canSwipe;
+	public static bool canSwipe;
+
+	Transform player;
 
 
 	void Start(){
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 		CameraController.finishedMoving += canSwipeAgain;
 		canSwipe = true;
 	}
@@ -33,19 +36,18 @@ public class Swipe: MonoBehaviour {
 			}
 			if(Input.GetMouseButton(0)){
 				currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-				Vector2 v = clickPos - currentPos;
 				if(onHold!=null){
 					onHold(currentPos);
 				}
 			}
 
 			if(Input.GetMouseButtonUp(0)){
-				Vector2 v = currentPos - clickPos;
+				Vector2 v = currentPos - (Vector2)player.position;
 				//angle = Mathf.Atan2(1 - v.x, v.y) * Mathf.Rad2Deg;
 				if(onLift != null){
 					onLift(currentPos);
 				}
-				if(v.magnitude != 0.0f)
+				if(v.magnitude != 0)
 					canSwipe = false;
 				
 			}
@@ -54,7 +56,7 @@ public class Swipe: MonoBehaviour {
 
 	}
 
-	void canSwipeAgain(){
+	public static void canSwipeAgain(){
 		canSwipe = true;
 	}
 
