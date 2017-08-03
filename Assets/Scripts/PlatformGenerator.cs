@@ -7,7 +7,7 @@ public enum PlatformsEnum
     Enemy,
     Planet
 }
-public class PlatformGenerator : ElementGenerator<PlatformsEnum>{
+public class PlatformGenerator : ElementGenerator<PlatformsEnum,List<GameObject>>{
     List<GameObject> enemies = new List<GameObject>();
     List<GameObject> platforms = new List<GameObject>();
     

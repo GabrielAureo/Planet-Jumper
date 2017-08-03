@@ -42,7 +42,7 @@ public class PositionGenerator {
     }
 
     public Vector2 randomPosition(Vector2 center){
-        float angle = Random.value * Mathf.PI *2;
+        float angle = Random.value * Mathf.PI * 2;
         float x = Mathf.Cos(angle) * radius_x;
         float y = Mathf.Sin(angle) * radius_y;
 

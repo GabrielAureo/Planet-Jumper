@@ -29,7 +29,6 @@ public class Swipe: MonoBehaviour {
 		if(canSwipe){
 			if(Input.GetMouseButtonDown(0)){
 				clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-				Debug.Log(clickPos);
 				if(onClick!=null){
 					onClick(clickPos);
 				}

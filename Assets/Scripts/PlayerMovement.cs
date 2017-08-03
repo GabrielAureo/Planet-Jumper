@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Start ()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        Swipe.onLift += Throw;
+        Swipe.onLift += Launch;
         PlayerCollision.onPlatformHit += Collided;
         Swipe.onClick += startRotation;
     }
@@ -24,10 +24,20 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
-    public void Throw (Vector2 angle){
-        Swipe.onHold -= Rotate;
-        rb.velocity = Vector3.zero;
+    public void Launch(Vector2 angle){
         Vector2 direction = angle - (Vector2)transform.position;
+        Throw(direction);
+
+    }
+
+    public void changeDirection(Vector2 angle){
+        Vector2 direction = angle.normalized * (rb.velocity.magnitude);
+        rb.velocity = direction;
+    }
+
+    public void Throw (Vector2 direction){
+        Swipe.onHold -= Rotate;
+        rb.velocity = Vector2.zero;
         if(direction.magnitude < 1)
             direction = direction.normalized;
         rb.AddForce(direction * force);
