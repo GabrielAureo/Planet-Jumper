@@ -13,7 +13,7 @@ public class Entropy: Obstacle{
 
         int toDestroy = Random.Range(1,platforms.Count - 1);
 
-        for(int i =0; i <toDestroy; i++){
+        for(int i =0; i < toDestroy; i++){
             GameObject.Destroy(platforms[Random.Range(0,platforms.Count)]);
             platforms.RemoveAt(i);
         }
