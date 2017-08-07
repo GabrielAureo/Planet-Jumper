@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public enum ObstacleEnum{
-    BlackHole, WormHole, Entropy
-}
-
 public class ObstacleGenerator : ElementGenerator<ObstacleEnum,GameObject>{
 
     List<GameObject> obstacles = new List<GameObject>();

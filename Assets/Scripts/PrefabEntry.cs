@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum ObstacleEnum1{
+public enum ObstacleEnum{
 	 
 	Entropy = 0,
 	WormHole = 1,
@@ -25,7 +25,7 @@ public class PrefabEntry<T>{
 }
 
 [Serializable]
-public class ObstacleEntry : PrefabEntry<ObstacleEnum1>{}
+public class ObstacleEntry : PrefabEntry<ObstacleEnum>{}
 [Serializable]
 public class PlanetEntry : PrefabEntry<PlanetEnum>{}
 [Serializable]

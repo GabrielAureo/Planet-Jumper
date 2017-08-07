@@ -9,38 +9,23 @@ public class PrefabManager : MonoBehaviour {
 	public List<EnemyEntry> enemies;
 	public List<PlanetEntry> planets;
 
-	public static List<GameObject> obstaclesList;
-	public static List<GameObject> enemiesList;
-	public static List<GameObject> planetsList;
+	public static GameObject[] obstaclesList;
+	public static GameObject[] enemiesList;
+	public static GameObject[] planetsList;
 
     void Awake(){
-		Debug.Log(obstacles.Count);
-		obstaclesList = new List<GameObject>(new GameObject[obstacles.Count]);
-		Debug.Log(obstaclesList.Count);
+		obstaclesList = new GameObject[obstacles.Count];
 		for (int i =0; i < obstacles.Count; i++){
-			Debug.Log("i" + i + (int)(obstacles[i].key));
-			obstaclesList.Insert((int)(obstacles[i].key), obstacles[i].value);
+			obstaclesList[(int)obstacles[i].key] =  obstacles[i].value;
 		}
-		enemiesList = new List<GameObject>(new GameObject[enemies.Count]);
+		enemiesList = new GameObject[enemies.Count];
 		for (int i =0; i < enemies.Count; i++){
-			enemiesList.Insert((int)enemies[i].key, enemies[i].value);
+			enemiesList[(int)enemies[i].key] = enemies[i].value;
 		}
-		planetsList = new List<GameObject>(new GameObject[planets.Count]);
+		planetsList = new GameObject[planets.Count];
 		for (int i =0; i < planets.Count; i++){
-			planetsList.Insert((int)planets[i].key, planets[i].value);
+			planetsList[(int)planets[i].key] = planets[i].value;
 		}
 		
-	}
-
-	void Start(){
-		printListinha(obstaclesList);
-		printListinha(enemiesList);
-		printListinha(planetsList);
-	}
-
-	void printListinha(List<GameObject> list){
-		for(int i =0; i < list.Count; i++){
-			Debug.Log(i.ToString() + list[i]);
-		}
 	}
 }
