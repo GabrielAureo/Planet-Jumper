@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class ElementGenerator<T,E>{
-
-    public Dictionary<T,E> prefabs;
+public abstract class ElementGenerator{
     
     public List<GameObject> elements;
     public PositionGenerator posGen;
 
     
-    public ElementGenerator(Dictionary<T,E> prefabs, float minBound, float maxBound){
-        this.prefabs = prefabs;
+    public ElementGenerator(float minBound, float maxBound){
         this.posGen = new PositionGenerator(minBound, maxBound);
         this.elements = new List<GameObject>();
     }

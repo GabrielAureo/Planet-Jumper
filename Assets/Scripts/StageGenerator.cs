@@ -4,40 +4,22 @@ using UnityEngine;
 
 
 public class StageGenerator : MonoBehaviour {
-	public List<GameObject> enemiesPrefabs;
-	public List<GameObject> planetsPrefabs;
-	Dictionary<PlatformsEnum, List<GameObject>> PlatformDictionary;
-	
-	public static List<GameObject> platformList;
-	public static List<GameObject> obstacleList;
-
-	public List<GameObject> obstaclesPrefabs;
-	Dictionary<ObstacleEnum, GameObject> ObstacleDictionary;
 
 	PlatformGenerator platformGenerator;
 	ObstacleGenerator obstacleGenerator;
+
+	List<GameObject> platformList;
+	List<GameObject> obstacleList;
 
 	
 
 	List<ObstacleEnum> enums = new List<ObstacleEnum>(){ObstacleEnum.WormHole, ObstacleEnum.Entropy};
 	// Use this for initialization
 	void Start () {
+		platformGenerator = new PlatformGenerator(ScreenManager.platformRadius[0],ScreenManager.platformRadius[1]);
 
-		PlatformDictionary = new Dictionary<PlatformsEnum, List<GameObject>>(){
-			{PlatformsEnum.Enemy, enemiesPrefabs},
-			{PlatformsEnum.Planet, planetsPrefabs},
-		};
-		platformGenerator = new PlatformGenerator(PlatformDictionary,ScreenManager.platformRadius[0],ScreenManager.platformRadius[1]);
-	
-
-		ObstacleDictionary = new Dictionary<ObstacleEnum,GameObject>();
-		//Temporário
-
-		for(int i = 0; i < obstaclesPrefabs.Count; i++){
-			ObstacleDictionary.Add(enums[i],obstaclesPrefabs[i]);
-		}
 		
-		obstacleGenerator = new ObstacleGenerator(ObstacleDictionary,ScreenManager.obstacleRadius[0],ScreenManager.obstacleRadius[1]);
+		obstacleGenerator = new ObstacleGenerator(ScreenManager.obstacleRadius[0],ScreenManager.obstacleRadius[1]);
 
 		PlayerCollision.onPlatformHit += newStage;
 		stageLayout(Vector2.zero);

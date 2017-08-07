@@ -12,6 +12,7 @@ public class PrefabManager : MonoBehaviour {
 	public static GameObject[] obstaclesList;
 	public static GameObject[] enemiesList;
 	public static GameObject[] planetsList;
+	public static GameObject[] platformList;
 
     void Awake(){
 		obstaclesList = new GameObject[obstacles.Count];

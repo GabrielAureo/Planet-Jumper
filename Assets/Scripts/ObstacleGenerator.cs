@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class ObstacleGenerator : ElementGenerator<ObstacleEnum,GameObject>{
+public class ObstacleGenerator : ElementGenerator{
 
-    List<GameObject> obstacles = new List<GameObject>();
-
-    public ObstacleGenerator(Dictionary<ObstacleEnum,GameObject> prefabs, float minBound, float maxBound) : base(prefabs, minBound, maxBound){
-        foreach(GameObject element in prefabs.Values){
-            obstacles.Add(element);
-        }
+    public ObstacleGenerator (float minBound, float maxBound) : base(minBound, maxBound){
     }
 
     override public List<GameObject> Spawn(List<Vector2> positions){
         foreach(Vector2 pos in positions){
-				GameObject obstacle = obstacles[Random.Range(0,obstacles.Count)];
+				GameObject obstacle = PrefabManager.obstaclesList[Random.Range(0,PrefabManager.obstaclesList.Length)];
 				GameObject p = GameObject.Instantiate(obstacle, pos, new Quaternion(0,0,0,0));
 				elements.Add(p);
 		}

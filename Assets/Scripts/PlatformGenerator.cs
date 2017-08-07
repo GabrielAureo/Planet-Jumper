@@ -2,23 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlatformsEnum
-{
-    Enemy,
-    Planet
-}
-public class PlatformGenerator : ElementGenerator<PlatformsEnum,List<GameObject>>{
+
+public class PlatformGenerator : ElementGenerator{
     List<GameObject> enemies = new List<GameObject>();
     List<GameObject> platforms = new List<GameObject>();
     
 
-    public PlatformGenerator(Dictionary<PlatformsEnum, List<GameObject>> prefabs, float minBound, float maxBound) : base(prefabs,minBound,maxBound){
-        this.prefabs = prefabs;
-        prefabs.TryGetValue(PlatformsEnum.Enemy, out enemies);
-
-        foreach(KeyValuePair<PlatformsEnum,List<GameObject>> prefab in prefabs){
-            platforms.AddRange(prefab.Value);
-        }
+    public PlatformGenerator(float minBound, float maxBound) : base(minBound,maxBound){
+        enemies.AddRange(PrefabManager.enemiesList);
+        platforms.AddRange(PrefabManager.planetsList);
+        platforms.AddRange(PrefabManager.enemiesList);        
         
     }
     override public List<GameObject> Spawn(List<Vector2> positions){
