@@ -8,8 +8,8 @@ public class StageGenerator : MonoBehaviour {
 	PlatformGenerator platformGenerator;
 	ObstacleGenerator obstacleGenerator;
 
-	List<GameObject> platformList;
-	List<GameObject> obstacleList;
+	public static List<GameObject> platformList;
+	public static List<GameObject> obstacleList;
 
 	
 
@@ -17,8 +17,6 @@ public class StageGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		platformGenerator = new PlatformGenerator(ScreenManager.platformRadius[0],ScreenManager.platformRadius[1]);
-
-		
 		obstacleGenerator = new ObstacleGenerator(ScreenManager.obstacleRadius[0],ScreenManager.obstacleRadius[1]);
 
 		PlayerCollision.onPlatformHit += newStage;

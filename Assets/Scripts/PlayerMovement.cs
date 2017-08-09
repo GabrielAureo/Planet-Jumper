@@ -6,9 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour {
 	Rigidbody2D rb;
     public float force;
-
     public Platform platform;
-
     Vector2 initial;
 
 	// Use this for initialization
@@ -31,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void changeDirection(Vector2 angle){
-        Vector2 direction = angle.normalized * (rb.velocity.magnitude);
+        Vector3 direction = angle.normalized * (rb.velocity.magnitude);
         rb.velocity = direction;
     }
 
