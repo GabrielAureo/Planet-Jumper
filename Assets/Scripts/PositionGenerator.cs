@@ -19,9 +19,10 @@ public class PositionGenerator {
         this.maxBound = maxBound;
     }
 
-    public List<Vector2> uniformDistance(int n, Vector2 center, float totalRotation = 0){
+    public List<Vector2> uniformDistance(RangeBound range, Vector2 center, float totalRotation = 0){
         angles.Clear();
         List<Vector2> positions = new List<Vector2>();
+        int n = Random.Range(range.min, range.max);
         float partAngles = (2*Mathf.PI) /n;
 
         for (int i = 0; i < n; i++){

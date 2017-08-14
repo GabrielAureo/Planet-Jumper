@@ -6,9 +6,17 @@ using TMPro;
 public class Score : MonoBehaviour {
 	public TextMeshProUGUI scoreText;
 	public TextMeshProUGUI multiplierText;
+
 	public int score;
 
-	public int multiplier;
+	public delegate void ScoreWatcher(int value);
+	public static ScoreWatcher onPoint;
+	public static ScoreWatcher onCombo;
+	public static ScoreWatcher onReset;
+
+	int multiplier;
+	public int maxMultiplier;
+	public int multiplierStep;
 
 
 	// Use this for initialization
@@ -18,7 +26,6 @@ public class Score : MonoBehaviour {
 		score =0;
 		scoreText.text = score.ToString();
 		PlayerCollision.onPlatformHit +=  hitPlatform; 
-		BoundCollliders.onGameOver += resetPoints;
 	}
 	
 	// Update is called once per frame
@@ -41,12 +48,16 @@ public class Score : MonoBehaviour {
 	void addPoints(int points){
 		score += points*multiplier;
 		scoreText.text = score.ToString();
+
+		if(onPoint != null) onPoint(score);
 	}
 
 	void increaseMultiplier(){
-		if(multiplier < 10){
-			multiplier++;
+		if(multiplier < maxMultiplier){
+			multiplier += multiplierStep;
 			multiplierText.text = concatenateMultiplier(multiplier);
+			if(onCombo != null) onCombo(multiplier);
+
 		}
 	}
 
@@ -58,10 +69,16 @@ public class Score : MonoBehaviour {
 	void resetMultiplier(){
 		multiplier = 1;
 		multiplierText.text = concatenateMultiplier(multiplier);
+		if(onReset != null) onReset(multiplier);
 	}
 
 	string concatenateMultiplier(int value){
 		return value+"x";
+	}
+
+	void OnDestroy(){
+		onPoint = null;
+		onCombo = null;
 	}
 
 	

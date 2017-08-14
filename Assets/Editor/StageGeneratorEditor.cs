@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-
-[CanEditMultipleObjects]
-
 [CustomEditor(typeof(StageGenerator))]
 public class StageGeneratorEditor: Editor{
 
     public override void OnInspectorGUI(){
+        DrawDefaultInspector();
+        
         if(!Application.isPlaying){
             EditorGUILayout.LabelField("Waiting for play mode.");
             return;

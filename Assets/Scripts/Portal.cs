@@ -8,9 +8,9 @@ public class Portal : Obstacle{
     override protected void onHit(Collider2D other)
     {
         Camera cam = Camera.main;
-        Vector2 center = cam.ScreenToWorldPoint(new Vector2(cam.pixelWidth,cam.pixelHeight)/2);
+    
         PositionGenerator posGen = new PositionGenerator(ScreenManager.freeZoneRadius[0], ScreenManager.freeZoneRadius[1]);
-        Vector2 angle = posGen.randomPosition(center);
+        Vector2 angle = posGen.randomPosition(ScreenManager.center);
 
         gameObject.GetComponent<Collider2D>().enabled = false;
         transform.position = angle;

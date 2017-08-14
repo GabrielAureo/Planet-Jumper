@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Platform: MonoBehaviour {
 
-	public float radius;
+	[HideInInspector]public float radius;
 
 	public int points;
 

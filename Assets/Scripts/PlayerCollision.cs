@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerCollision : MonoBehaviour {
 	public delegate void CollisionHandler(GameObject other);
 	public static event CollisionHandler onPlatformHit;
-	public static event CollisionHandler onBoundHit;
+	public static event CollisionHandler onGameOverHit;
 	public static event CollisionHandler onObstacleHit;
 
 	
@@ -14,9 +14,7 @@ public class PlayerCollision : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D col)
 	{
 		if(col.transform.tag == "GameOver" /* && onBoundHit != null*/ ){
-			//onBoundHit(col.gameObject);
-			Debug.Log("Morreu");
-			GameOverTest();
+			GameOver.ResetGame();
 
 		}
 
@@ -25,13 +23,11 @@ public class PlayerCollision : MonoBehaviour {
 		}	
 	}
 
-	void GameOverTest(){
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
-	}
+	
 
 	void OnDestroy()
 	{	
-		onBoundHit = null;
+		onGameOverHit = null;
 		onPlatformHit = null;
 		onObstacleHit = null;
 	}

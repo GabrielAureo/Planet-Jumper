@@ -2,14 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class StageGenerator : MonoBehaviour {
 
 	PlatformGenerator platformGenerator;
 	ObstacleGenerator obstacleGenerator;
 
+	[HideInInspector]
 	public static List<GameObject> platformList;
+	[HideInInspector]
 	public static List<GameObject> obstacleList;
+
+	public RangeBound[] platformProgression;
+	public RangeBound[] obstacleProgression;
+
+	RangeBound platformCount{
+		get{
+			return platformProgression[ScoreProgression.scoreLevel];
+		}
+	}
+	RangeBound obstacleCount{
+		get{
+			return obstacleProgression[ScoreProgression.comboLevel];
+		}
+	}
 
 	
 
@@ -34,20 +49,12 @@ public class StageGenerator : MonoBehaviour {
 		List<Vector2> platformPositions, obstaclePositions;
 		float platformWorldRotation = Random.value * 2 * Mathf.PI;
 		float obstacleWorldRotation = Random.value * 2 * Mathf.PI;
-		platformPositions = platformGenerator.posGen.uniformDistance(platformCount(),center,platformWorldRotation);
-		obstaclePositions = obstacleGenerator.posGen.uniformDistance(obstacleCount(),center,obstacleWorldRotation);
+		platformPositions = platformGenerator.posGen.uniformDistance(platformCount,center,platformWorldRotation);
+		obstaclePositions = obstacleGenerator.posGen.uniformDistance(obstacleCount,center,obstacleWorldRotation);
 		platformList = platformGenerator.Spawn(platformPositions);
 		obstacleList = obstacleGenerator.Spawn(obstaclePositions);
 
 	}
-
-	int platformCount(){
-		return Random.Range(2,6);
-	}
-
-	int obstacleCount(){
-		return Random.Range(1,3);
-	}
-
+	
 	
 }
