@@ -9,7 +9,7 @@ public class StageGeneratorEditor: Editor{
         DrawDefaultInspector();
         
         if(!Application.isPlaying){
-            EditorGUILayout.LabelField("Waiting for play mode.");
+            EditorGUILayout.PrefixLabel("Waiting for play mode.");
             return;
         }
         this.Repaint();

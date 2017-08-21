@@ -29,5 +29,12 @@ public class ScreenManager : MonoBehaviour {
 
 	void updateCenter(GameObject hit){
 		center = hit.transform.position;
+
+	}
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawSphere(center, 1f);
 	}
 }

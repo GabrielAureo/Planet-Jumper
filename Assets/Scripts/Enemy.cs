@@ -19,7 +19,6 @@ public class Enemy : Platform {
 
 	public void randomLaunch(){
 		Vector2 randomDir = new Vector2(Random.Range(-1f,1f),Random.Range(-1f,1f)).normalized;
-		Debug.Log("randomDir =" + randomDir);
 		if(randomDir == Vector2.zero)
 			randomDir = Vector2.up;
 		other.GetComponent<Rigidbody2D>().AddForce(randomDir *500);

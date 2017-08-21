@@ -12,20 +12,19 @@ public class StageGenerator : MonoBehaviour {
 	[HideInInspector]
 	public static List<GameObject> obstacleList;
 
-	public RangeBound[] platformProgression;
-	public RangeBound[] obstacleProgression;
-
 	RangeBound platformCount{
 		get{
-			return platformProgression[ScoreProgression.scoreLevel];
+			return planetsRange.steps[ScoreProgression.scoreLevel];
 		}
 	}
 	RangeBound obstacleCount{
 		get{
-			return obstacleProgression[ScoreProgression.comboLevel];
+			return obstaclesRange.steps[ScoreProgression.comboLevel];
 		}
 	}
 
+	public RangeBoundDifficulty planetsRange;
+	public RangeBoundDifficulty obstaclesRange;
 	
 
 	List<ObstacleEnum> enums = new List<ObstacleEnum>(){ObstacleEnum.WormHole, ObstacleEnum.Entropy};
