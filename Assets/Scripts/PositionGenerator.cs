@@ -12,7 +12,7 @@ public class PositionGenerator {
     public List<float> angles = new List<float>();
 
     public PositionGenerator(float minBound, float maxBound){
-        Vector2 edgeVector = Camera.main.ScreenToWorldPoint(Vector2.zero);
+        Vector2 edgeVector = ScreenManager.edgeVector;
         radius_x = edgeVector.x;
         radius_y = edgeVector.y;
         this.minBound = minBound;
@@ -43,11 +43,16 @@ public class PositionGenerator {
     }
 
     public Vector2 randomPosition(Vector2 center){
+        Debug.Log("radius_x " + radius_x);
+        Debug.Log("radius_y " + radius_y);
         float angle = Random.value * Mathf.PI * 2;
         float x = Mathf.Cos(angle) * (radius_x);
         float y = Mathf.Sin(angle) * (radius_y);
 
-        Vector2 v = (new Vector2(x,y) * Random.Range(minBound,maxBound)) + center;
+        float ring = Random.Range(minBound,maxBound);
+
+        Debug.Log(ring);
+        Vector2 v = (new Vector2(x,y) * ring) + center;
 
         return v;
     }
